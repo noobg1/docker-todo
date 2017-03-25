@@ -1,0 +1,27 @@
+version: '2'
+services: 
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_DB=todoApp
+      - POSTGRES_USER=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+  postgres-migration:
+    image: postgres
+    command: bash /tmp/create-test-db.sh
+    restart: on-failure 
+    volumes:
+      - ./backend/todoApp.sql:/tmp/todoApp.sql
+      - ./backend/create-test-db.sh:/tmp/create-test-db.sh
+  frontend:
+    build: './frontend'
+    ports:
+      - 80:80
+  backend:
+    build: './backend' 
+    ports:
+      - 8080:8080
+    

@@ -1,0 +1,10 @@
+node_modules
+coverage
+public
+views
+test
+create-test-db.sh
+test.js
+.DS_Store
+Dockerfile
+.dockerignore
